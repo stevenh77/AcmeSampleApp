@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Acme.UI.Views.About"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel MinWidth="200">
+                <TextBlock Style="{StaticResource Heading2}" Text="ABOUT" />
+                <Image Width="400"
+                       Margin="0,0,0,8"
+                       HorizontalAlignment="Left">
+                    <Image.Source>
+                        <BitmapImage DecodePixelWidth="400" UriSource="pack://application:,,,/Assets/logo.png" />
+                    </Image.Source>
+                </Image>
+                <TextBlock Margin="0,0,0,20"
+                           Opacity="0.7"
+                           Text="This sample application was written by Steven Hollidge and features the following techologies:"
+                           TextWrapping="Wrap" />
+
+                <ItemsControl Height="300" ItemsSource="{Binding TechnologyList}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="320">
+                                <BulletDecorator Margin="10,2,5,0">
+                                    <BulletDecorator.Bullet>
+                                        <Ellipse Width="8"
+                                                 Height="8"
+                                                 Margin="0,2,0,5"
+                                                 Fill="Gray"
+                                                 Stroke="Gray"
+                                                 StrokeThickness="0" />
+                                    </BulletDecorator.Bullet>
+                                    <TextBlock Margin="5,0,0,0"
+                                               Opacity="0.7"
+                                               Text="{Binding Path=.}" />
+                                </BulletDecorator>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

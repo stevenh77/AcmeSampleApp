@@ -1,0 +1,29 @@
+﻿<mui:ModernWindow x:Class="Acme.UI.MainWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  Title="ACME"
+                  ContentSource="/Views/Home.xaml"
+                  IsTitleVisible="True"
+                  WindowState="Maximized">
+
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="welcome">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="home" Source="/Views/Home.xaml" />
+                <mui:Link DisplayName="search" Source="/Views/Search.xaml" />
+                <mui:Link DisplayName="maintenance" Source="/Views/Maintenance.xaml" />
+                <mui:Link DisplayName="audit" Source="/Views/Audit.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="settings" GroupName="settings">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="software" Source="/Views/Settings.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="settings" Source="/Views/Settings.xaml" />
+    </mui:ModernWindow.TitleLinks>
+</mui:ModernWindow>
