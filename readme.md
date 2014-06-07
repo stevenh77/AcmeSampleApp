@@ -28,7 +28,7 @@ SQL review:  [http://youtu.be/dLubVn7kZug](http://youtu.be/dLubVn7kZug)
 
 1) Download the github repo from:  [https://github.com/stevenh77/acmesampleapp](https://github.com/stevenh77/acmesampleapp)
 
-2) Restore the SQL database from the file found in the database folder:  AcmeSampleDb.bak
+2) Restore the SQL database from the file found in the database folder:  AcmeSampleDb
 
 3) Within the src folder, open the "AcmeSample.sln" solution file in Visual Studio 2012/2013
 
