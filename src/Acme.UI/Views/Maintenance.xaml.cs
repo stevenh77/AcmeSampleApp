@@ -16,5 +16,10 @@ namespace Acme.UI.Views
         {
             ((MaintenanceViewModel)this.DataContext).EditCommand.Execute(null);
         }
+
+        private async void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            await ((MaintenanceViewModel)this.DataContext).LoadCustomers();
+        }
     }
 }

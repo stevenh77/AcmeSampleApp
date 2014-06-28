@@ -104,7 +104,6 @@
     <Compile Include="Mocks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />
-    <None Include="Controllers\ValuesControllerTest.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

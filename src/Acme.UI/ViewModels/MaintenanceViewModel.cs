@@ -14,6 +14,11 @@ using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.PubSubEvents;
 using MoreLinq;
+using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
+using System.Collections.Generic;
+using System.Reactive.Disposables;
+using System.Reactive.Concurrency;
 
 namespace Acme.UI.ViewModels
 {
@@ -46,7 +51,6 @@ namespace Acme.UI.ViewModels
             this.DeleteCommand = new RelayCommand(DeleteCommandOnExecute, EditAndDeleteCommandCanExecute);
 
             this.Customers = new ObservableCollection<Customer>();
-            this.LoadCustomers();
         }
 
         private bool EditAndDeleteCommandCanExecute(object o)
@@ -108,16 +112,33 @@ namespace Acme.UI.ViewModels
         {
             try
             {
+                // we're only loading 50 as the grid doesn't performance very well under load
                 IsLoading = true;
-                this.Customers.Clear();
+                Customers.Clear();
                 
-                var customers = await services.GetAllCustomers();
-                var batches = customers.Take(25).Batch(50);
-                
-                foreach (var batch in batches)
-                    this.Customers.AddRange(batch);
+                // await
+                //var customers = await services.GetAllCustomers();
+                //Customers.AddRange(customers.Take(50));
+                //IsLoading = false;
 
-                IsLoading = false;
+                // or rx #1
+                //var source = Observable.Create<IEnumerable<Customer>>(
+                //    async o =>
+                //    {
+                //        var response = await services.GetAllCustomers();
+                //        o.OnNext(response);
+                //        o.OnCompleted();
+                //        return Disposable.Empty;
+                //    });
+
+                // or rx #2
+                var source = services.GetAllCustomers().ToObservable();
+
+                source
+                    .SubscribeOn(NewThreadScheduler.Default)
+                    .ObserveOnDispatcher()
+                    .Subscribe(customers => Customers.AddRange(customers.Take(50)),
+                        () => IsLoading = false);
             }
             catch (Exception ex)
             {
